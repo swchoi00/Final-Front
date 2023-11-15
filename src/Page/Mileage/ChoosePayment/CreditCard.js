@@ -61,7 +61,7 @@ const CreditCard = ( {userInfo, setUserInfo, trans, setTrans} ) => {
       buyer_postcode: '123-456',
     }, async (rsp) => {
       try {
-        const { data } = await axios.post('http://localhost:8282/verifyIamport/' + rsp.imp_uid);
+        const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/verifyIamport/` + rsp.imp_uid);
         console.log(data)
         if (rsp.paid_amount === data.response.amount) {
           axiosInstance.post('/payCultureland', {id : "test2" , userInfo:userInfo, mileage: totalMoney}) // 보내는 값들 전부 바꿔줘야함
