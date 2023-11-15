@@ -115,7 +115,7 @@ const TransDetail = ({ trans, userInfo, setStartTransInfo, startTransInfo, setTr
         <Card style={{ width: '15rem', height: '212px' }}>
           <Card.Img variant="top" src={getTier()} className='gradeImg' />
           <Card.Body>
-            <Card.Title className='grade'>멤버등급</Card.Title>
+            <Card.Title className='grade'>{getTierValue()}</Card.Title>
             <Card.Text>
               {transDetail.member.name}님
             </Card.Text>
