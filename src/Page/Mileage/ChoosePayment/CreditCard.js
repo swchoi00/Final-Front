@@ -7,16 +7,44 @@ import { useNavigate } from 'react-router-dom';
 
 const CreditCard = ( {userInfo, setUserInfo, trans, setTrans} ) => {
 
+  // useEffect(() => {
+  //   const jquery = document.createElement("script");
+  //   jquery.src = "http://code.jquery.com/jquery-1.12.4.min.js";
+  //   const iamport = document.createElement("script");
+  //   iamport.src = "http://cdn.iamport.kr/js/iamport.payment-1.1.7.js";
+  //   document.head.appendChild(jquery);
+  //   document.head.appendChild(iamport);
+  //   return () => {
+  //     document.head.removeChild(jquery);
+  //     document.head.removeChild(iamport);
+  //   };
+  // }, []);
   useEffect(() => {
-    const jquery = document.createElement("script");
-    jquery.src = "http://code.jquery.com/jquery-1.12.4.min.js";
-    const iamport = document.createElement("script");
-    iamport.src = "http://cdn.iamport.kr/js/iamport.payment-1.1.7.js";
-    document.head.appendChild(jquery);
-    document.head.appendChild(iamport);
+    const loadScript = (src, callback) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = callback;
+      document.head.appendChild(script);
+    };
+  
+    loadScript("https://code.jquery.com/jquery-1.12.4.min.js", () => {
+      loadScript("https://cdn.iamport.kr/js/iamport.payment-1.1.7.js", () => {
+        // 스크립트가 성공적으로 로드되었습니다.
+      });
+    });
+  
     return () => {
-      document.head.removeChild(jquery);
-      document.head.removeChild(iamport);
+      // 정리: 문서 헤드에서 스크립트 제거
+      const jqueryScript = document.querySelector("script[src='https://code.jquery.com/jquery-1.12.4.min.js']");
+      const iamportScript = document.querySelector("script[src='https://cdn.iamport.kr/js/iamport.payment-1.1.7.js']");
+  
+      if (jqueryScript) {
+        document.head.removeChild(jqueryScript);
+      }
+  
+      if (iamportScript) {
+        document.head.removeChild(iamportScript);
+      }
     };
   }, []);
   
